@@ -28,23 +28,14 @@
  // Admin menu
  function proxy_vrm_add_admin_menu() {
      add_menu_page('Proxy VRM API', 'Proxy VRM API', 'manage_options', 'proxy-vrm', 'proxy_vrm_admin_page');
-     add_submenu_page('proxy-vrm', 'Impostazioni', 'Impostazioni', 'manage_options', 'proxy-vrm-settings', 'proxy_vrm_settings_page'); 
+     
     }
  
  function proxy_vrm_admin_page() {
      ?>
      <div class="wrap">
          <h1>Proxy VRM API</h1>
-         <p>Configurazione e stato del plugin.</p>
-     </div>
-     <?php
- }
- add_action('admin_menu', 'proxy_vrm_add_admin_menu');
 
- function proxy_vrm_settings_page() {
-    ?>
-    <div class="wrap">
-        <h1>Scadenza token proxy</h1>
         <form method="post" action="options.php">
             <?php
             settings_fields('proxy_vrm_settings_group');
@@ -52,17 +43,25 @@
             submit_button();
             ?>
         </form>
-    </div>
-    <?php
-}
+     </div>
+     
+     <?php
+ }
+ add_action('admin_menu', 'proxy_vrm_add_admin_menu');
+
+
+
+
 function proxy_vrm_register_settings() {
     register_setting('proxy_vrm_settings_group', 'proxy_vrm_token_life');
 
-    add_settings_section('proxy_vrm_settings_section', 'Configurazione API', null, 'proxy-vrm-settings');
+    add_settings_section('proxy_vrm_settings_section', 'Proxy Login Token', null, 'proxy-vrm-settings');
 
     add_settings_field('proxy_vrm_token_life', 'Scadenza proxy (minuti)', 'proxy_vrm_token_lifecallback', 'proxy-vrm-settings', 'proxy_vrm_settings_section');
 }
 add_action('admin_init', 'proxy_vrm_register_settings');
+
+
 
 function proxy_vrm_token_lifecallback() {
     $token_life = get_option('proxy_vrm_token_life', '');
