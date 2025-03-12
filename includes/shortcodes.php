@@ -16,10 +16,14 @@ add_shortcode('proxy_auth', function () {
 add_shortcode('proxy_dashboard', function () {
     ob_start();
     ?>
+    <div id="loading-overlay">
+        <div class="loading-spinner"></div>
+        <p>Caricamento in corso...</p>
+    </div>
 
     <div id="proxy-auth-form" class="wp-block-group">
-        <span id="proxy-auth-close">&times;</span>
-
+        
+        <h2>Login VRM</h2>
         <!-- Form iniziale per username e password -->
         <form id="proxy-form">
             <?php wp_nonce_field('proxy_auth_nonce', 'proxy_auth_nonce_field'); ?>
@@ -27,14 +31,14 @@ add_shortcode('proxy_dashboard', function () {
             <input type="text" id="username" name="username" class="wp-block-input input-form" required>
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" class="wp-block-input input-form" required>
-            <button type="submit" class="wp-block-button__link login-button">Login</button>
+            <button type="submit" class="wp-block-button__link">Login</button>
         </form>
 
                 <!-- Form per il 2FA (inizialmente nascosto) -->
         <form id="proxy-2fa-form">
             <label for="twoFactorCode">Codice 2FA:</label>
             <input type="text" id="twoFactorCode" name="twoFactorCode" class="wp-block-input input-form" required>
-            <button type="submit" class="wp-block-button__link login-button">Verifica</button>
+            <button type="submit" class="wp-block-button__link">Verifica</button>
         </form>
     </div>
 
@@ -44,7 +48,7 @@ add_shortcode('proxy_dashboard', function () {
         <button id="logout-btn">Logout</button>
 
         <div id="vrm-data">
-            //DA IMPLEMENTARE DOPO AVER CAPITO COME FUNZIONA L'API
+            
         </div>
     </div>
 

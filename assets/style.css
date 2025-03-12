@@ -27,10 +27,6 @@
     display: none;
 }
 
-.login-button {
-    margin-top: 20px !important;
-}
-
 .input-form {
     border: 2px solid black;
     padding: 10px;
@@ -38,4 +34,37 @@
     border-radius: 4px; 
 }
 
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1000; 
+}
+
+.loading-spinner {
+    border: 4px solid #f3f3f3; /* Colore dello spinner */
+    border-top: 4px solid #3498db; /* Colore della parte animata */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite; /* Animazione */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#loading-overlay p {
+    margin-top: 10px;
+    font-size: 1.2em;
+    color: #333;
+}
 

@@ -13,17 +13,20 @@
  require_once plugin_dir_path(__FILE__) . 'includes/shortcodes.php';
  
  // script e stili
- function proxy_vrm_enqueue_assets() {
-    wp_enqueue_style('proxy-vrm-style', plugin_dir_url(__FILE__) . 'assets/style.css');
-    wp_enqueue_script('proxy-vrm-script', plugin_dir_url(__FILE__) . 'assets/script.js', ['jquery'], null, true);
-    
- 
-     // Passa l'URL AJAX di WordPress agli script JavaScript
-     wp_localize_script('proxy-vrm-script', 'proxyAjax', [
-        'ajaxurl' => admin_url('admin-ajax.php')
-    ]);
- }
- add_action('wp_enqueue_scripts', 'proxy_vrm_enqueue_assets');
+ function enqueue_proxy_scripts() {
+    if (has_shortcode(get_post()->post_content, 'proxy_auth')) {
+        wp_enqueue_script('proxy-auth-js', plugin_dir_url(__FILE__) . 'assets/auth.js', array('jquery'), null, true);
+        wp_localize_script('proxy-auth-js', 'proxyAjax', array('ajaxurl' => admin_url('admin-ajax.php')));
+    }
+
+    if (has_shortcode(get_post()->post_content, 'proxy_dashboard')) {
+        wp_enqueue_script('proxy-dashboard-js', plugin_dir_url(__FILE__) . 'assets/dashboard.js', array('jquery'), null, true);
+        wp_localize_script('proxy-dashboard-js', 'proxyAjax', array('ajaxurl' => admin_url('admin-ajax.php')));
+    }
+
+    wp_enqueue_style('proxy-style', plugin_dir_url(__FILE__) . 'assets/style.css');
+}
+add_action('wp_enqueue_scripts', 'enqueue_proxy_scripts');
  
  // Admin menu
  function proxy_vrm_add_admin_menu() {
