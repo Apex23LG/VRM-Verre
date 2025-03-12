@@ -1,29 +1,20 @@
 document.addEventListener("DOMContentLoaded", function () {
     const authButton = document.getElementById("proxy-auth-button");
-    const overlay = document.getElementById("proxy-auth-overlay");
-    const closeButton = document.getElementById("proxy-auth-close");
     const form = document.getElementById("proxy-form");
     const form2FA = document.getElementById("proxy-2fa-form");
-    const background = document.getElementById("proxy-auth-background");
+    const proxyDashboard = document.getElementById("proxy-dashboard");
+    const fullForm = document.getElementById("proxy-auth-form");
 
-    // Mostra l'overlay quando si clicca il pulsante "Apri il form"
-    if (authButton && overlay) {
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+    const proxyToken = getCookie("proxy_token");
+    
+    if (authButton) {
         authButton.addEventListener("click", function () {
-            overlay.style.display = "flex";
-            form.style.display = "flex";
-            form2FA.style.display = "none";
-        });
-    }
-
-    // Nasconde l'overlay quando si clicca la X o fuori dal box
-    if (closeButton && overlay) {
-        closeButton.addEventListener("click", function () {
-            overlay.style.display = "none";
-        });
-    }
-    if (background) {
-        background.addEventListener("click", function () {
-            overlay.style.display = "none";
+            window.location.href = "../vrmdashboard";
         });
     }
 
@@ -58,7 +49,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Gestione del submit del form 2FA
     if (form2FA) {
         form2FA.addEventListener("submit", function (e) {
             e.preventDefault();
@@ -85,4 +75,37 @@ document.addEventListener("DOMContentLoaded", function () {
             .catch(error => console.error("Errore AJAX:", error));
         });
     }
+    
+    if (proxyToken&&window.location.pathname.endsWith("/vrmdashboard")) {
+        fetch(proxyAjax.ajaxurl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `action=validate_proxy_token&proxy_token=${encodeURIComponent(proxyToken)}`,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.valid) {
+                proxyDashboard.style.display = "block";
+                fullForm.style.display = "none";
+            } else {
+                fullForm.style.display = "block";
+                proxyDashboard.style.display = "none";
+            }
+        })
+        .catch(error => {
+            console.error("Errore durante la validazione del token:", error);
+            fullForm.style.display = "block";
+            proxyDashboard.style.display = "none";
+
+        });
+    } else {
+        fullForm.style.display = "block";
+        proxyDashboard.style.display = "none";
+
+
+    }
+
+    
 });

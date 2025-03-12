@@ -9,8 +9,14 @@ add_shortcode('proxy_auth', function () {
         <button id="proxy-auth-button" class="wp-block-button__link">Apri il form</button>
     </div>
 
-    <div id="proxy-auth-overlay">
-    <div id="proxy-auth-background"></div>
+    <?php
+    return ob_get_clean();
+});
+
+add_shortcode('proxy_dashboard', function () {
+    ob_start();
+    ?>
+
     <div id="proxy-auth-form" class="wp-block-group">
         <span id="proxy-auth-close">&times;</span>
 
@@ -31,20 +37,17 @@ add_shortcode('proxy_auth', function () {
             <button type="submit" class="wp-block-button__link login-button">Verifica</button>
         </form>
     </div>
-</div>
 
-    <?php
-    return ob_get_clean();
-});
+    <div id="proxy-dashboard" class="wp-block-group">
+        <h2>Dashboard</h2>
+        <button id="get-data-btn">Recupera dati VRM</button>
+        <button id="logout-btn">Logout</button>
 
-add_shortcode('proxy_dashboard', function () {
-    ob_start();
-    ?>
-    <h2>Dashboard</h2>
-    <button id="get-data-btn">Recupera dati VRM</button>
-    <button id="logout-btn">Logout</button>
-    
-    <pre id="data-output"></pre>
+        <div id="vrm-data">
+            //DA IMPLEMENTARE DOPO AVER CAPITO COME FUNZIONA L'API
+        </div>
+    </div>
+
     <?php
     return ob_get_clean();
 });

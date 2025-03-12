@@ -86,6 +86,21 @@ function proxy_get_data() {
     wp_send_json_success(['data' => json_decode(wp_remote_retrieve_body($response), true)]);
 }
 
+function validate_proxy_token() {
+    $proxyToken = $_POST['proxy_token'] ?? '';
+
+    // Verifica il token utilizzando la tua funzione esistente
+    $isValid = verify_proxy_token($proxyToken);
+
+    // Restituisci una risposta JSON
+    wp_send_json(['valid' => $isValid]);
+}
+
+// Registra l'endpoint AJAX per gli utenti loggati e non loggati
+add_action('wp_ajax_validate_proxy_token', 'validate_proxy_token');
+add_action('wp_ajax_nopriv_validate_proxy_token', 'validate_proxy_token');
+
+
 // Logout e blacklist token
 add_action('wp_ajax_proxy_logout', function() {
     $proxy_token = $_POST['proxy_token'] ?? '';
@@ -93,3 +108,5 @@ add_action('wp_ajax_proxy_logout', function() {
     setcookie("proxy_token", "", time() - 3600, "/", "", false, true);
     wp_send_json_success(['message' => 'Logout eseguito']);
 });
+
+
