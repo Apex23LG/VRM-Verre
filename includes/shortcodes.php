@@ -44,7 +44,6 @@ add_shortcode('proxy_dashboard', function () {
 
     <div id="proxy-dashboard" class="wp-block-group">
         <h2>Dashboard</h2>
-        <button id="get-data-btn">Recupera dati VRM</button>
         <button id="logout-btn">Logout</button>
 
         <div id="vrm-data">

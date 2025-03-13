@@ -64,7 +64,8 @@ function proxy_auth_handler() {
 
 // Verifica il proxy-token
 function verify_proxy_token($proxy_token) {
-    return get_transient("proxy_token_$proxy_token") ?: false;
+    $data = get_transient("proxy_token_$proxy_token");
+    return $data['api_token'] ?: false;
 }
 
 function validate_proxy_token() {
