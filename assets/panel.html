@@ -93,13 +93,12 @@
     </style>
 
     <script>    
-        let battery = {{soc}} ; //this line in the Ide will show as an error.
+        var battery = '{{soc}}' ; //this line in the Ide will show as an error.
         
-        // Get the radial progress bar and percentage text elements
-        const radialProgress = document.getElementById('radialProgress');
-        const percentageText = document.getElementById('percentageText');
+        var radialProgress = document.getElementById('radialProgress');
+        var percentageText = document.getElementById('percentageText');
         // Calculate the progress in degrees (360 degrees = 100%)
-        const progress = (battery / 100) * 360;
+        var progress = (battery / 100) * 360;
         //Update the CSS variable for the conic-gradient
         radialProgress.style.setProperty('--progress', `${progress}deg`);
         // Update the percentage text

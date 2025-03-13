@@ -25,6 +25,8 @@ add_action('wp_ajax_proxy_auth', 'proxy_auth_handler');
 add_action('wp_ajax_nopriv_proxy_auth', 'proxy_auth_handler');
 
 function proxy_auth_handler() {
+    //Check USR regex e limite caratteri e nulla, regex per email
+    //Check PWD
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
 
@@ -86,7 +88,7 @@ function proxy_get_battery_data(){
         return;
     }
     $batteryData = [
-           'soc' => 49,
+           'soc' => rand(0, 100), // SOC tra 0 e 100%
             'voltage' => round(mt_rand(1150, 1350) / 100, 1), // Tensione tra 11.5V e 13.5V
             'current' => round(mt_rand(-200, 200) / 10, 1), // Corrente tra -20A e 20A
             'power' => round(mt_rand(0, 500) / 10, 1), // Potenza tra 0W e 50W

@@ -37,7 +37,7 @@ add_shortcode('proxy_dashboard', function () {
 
     <div id="proxy-dashboard" class="wp-block-group">
         <h2>Dashboard</h2>
-        <button id="logout-btn">Logout</button>
+        <button id="logout-btn" class="wp-block-button__link">Logout</button>
 
         <div id="vrm-data">
             

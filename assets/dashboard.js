@@ -135,6 +135,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     async function displayBatteryData(data) {
         const container = document.getElementById("vrm-data");
+        console.log(data);
     
         try {
             // Fetch the HTML from the WordPress AJAX endpoint
@@ -145,15 +146,15 @@ document.addEventListener("DOMContentLoaded", function () {
             
             // Replace placeholders with actual data in the HTML
             html = html
-                .replace(/{{soc}}/g, data.data.soc)
-                .replace(/{{voltage}}/g, data.data.voltage)
-                .replace(/{{current}}/g, data.data.current)
-                .replace(/{{power}}/g, data.data.power)
-                .replace(/{{consumedAh}}/g, data.data.consumedAh)
-                .replace(/{{timeToGo}}/g, data.data.timeToGo)
-                .replace(/{{alarm}}/g, data.data.alarm ? 'Attivo' : 'Inattivo')
-                .replace(/{{alarmReason}}/g, data.data.alarmReason || 'Nessuno')
-                .replace(/{{temperature}}/g, data.data.temperature);
+                .replace(/{{soc}}/g, data.soc)
+                .replace(/{{voltage}}/g, data.voltage)
+                .replace(/{{current}}/g, data.current)
+                .replace(/{{power}}/g, data.power)
+                .replace(/{{consumedAh}}/g, data.consumedAh)
+                .replace(/{{timeToGo}}/g, data.timeToGo)
+                .replace(/{{alarm}}/g, data.alarm ? 'Attivo' : 'Inattivo')
+                .replace(/{{alarmReason}}/g, data.alarmReason || 'Nessuno')
+                .replace(/{{temperature}}/g, data.temperature);
     
             // Insert the modified HTML into the container
             container.innerHTML = html;
@@ -169,15 +170,15 @@ document.addEventListener("DOMContentLoaded", function () {
                     // If the script is inline, replace placeholders in its content
                     let scriptContent = script.textContent;
                     scriptContent = scriptContent
-                        .replace(/{{soc}}/g, data.data.soc)
-                        .replace(/{{voltage}}/g, data.data.voltage)
-                        .replace(/{{current}}/g, data.data.current)
-                        .replace(/{{power}}/g, data.data.power)
-                        .replace(/{{consumedAh}}/g, data.data.consumedAh)
-                        .replace(/{{timeToGo}}/g, data.data.timeToGo)
-                        .replace(/{{alarm}}/g, data.data.alarm ? 'Attivo' : 'Inattivo')
-                        .replace(/{{alarmReason}}/g, data.data.alarmReason || 'Nessuno')
-                        .replace(/{{temperature}}/g, data.data.temperature);
+                    .replace(/{{soc}}/g, data.soc)
+                    .replace(/{{voltage}}/g, data.voltage)
+                    .replace(/{{current}}/g, data.current)
+                    .replace(/{{power}}/g, data.power)
+                    .replace(/{{consumedAh}}/g, data.consumedAh)
+                    .replace(/{{timeToGo}}/g, data.timeToGo)
+                    .replace(/{{alarm}}/g, data.alarm ? 'Attivo' : 'Inattivo')
+                    .replace(/{{alarmReason}}/g, data.alarmReason || 'Nessuno')
+                    .replace(/{{temperature}}/g, data.temperature);
                     newScript.textContent = scriptContent;
                 }
                 document.body.appendChild(newScript);
