@@ -70,3 +70,17 @@ function proxy_vrm_token_lifecallback() {
     $token_life = get_option('proxy_vrm_token_life', '');
     echo '<input type="text" name="proxy_vrm_token_life" value="' . esc_attr($token_life) . '" class="regular-text">';
 }
+
+function proxy_vrm_data_template() {
+    $file_path = plugin_dir_path(__FILE__) . 'assets/panel.html';
+
+    if (file_exists($file_path)) {
+        header("Content-Type: text/html");
+        echo file_get_contents($file_path);
+        exit;
+    } else {
+        wp_die("File not found", "Error", array("response" => 404));
+    }
+}
+add_action('wp_ajax_proxy_vrm_data_template', 'proxy_vrm_data_template');
+add_action('wp_ajax_nopriv_proxy_vrm_data_template', 'proxy_vrm_data_template'); // Allow public access

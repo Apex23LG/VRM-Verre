@@ -1,0 +1,150 @@
+<!--
+<p>Stato di carica (SOC): {{soc}}%</p>
+<p>Tensione: {{voltage}} V</p>
+<p>Corrente: {{current}} A</p>
+<p>Potenza: {{power}} W</p>
+<p>Consumo: {{consumedAh}} Ah</p>
+<p>Tempo rimanente: {{timeToGo}} secondi</p>
+<p>Allarme: {{alarm}}</p>
+<p>Motivo allarme: {{alarmReason}}</p>
+<p>Temperatura: {{temperature}} °C</p>
+-->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Bar Example</title>
+    <style>
+        /* Radial progress bar wrapper */
+        .radial-progress {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: conic-gradient(#3255c7 0%, #3255c7 var(--progress), #6fa4f5 var(--progress), #6fa4f5 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Inner circle to create the "donut" effect */
+        .radial-progress::before {
+            content: '';
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            border-radius: 50%;
+            background: white;
+        }
+
+        .radial-progress-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%; /* Make sure it takes full cell height */
+        }
+
+        /* Percentage text */
+        .percentage {
+            position: relative;
+            font-size: 24px;
+            font-weight: bold;
+            color: #3255c7;
+        }
+
+        .panel_table {
+            overflow: auto;
+            width: 100%;
+        }
+        
+        .panel_table table {
+            border: 1px solid #dededf;
+            height: 100%;
+            width: 100%;
+            table-layout: fixed;
+            border-collapse: collapse;
+            border-spacing: 1px;
+            text-align: left;
+        }
+        
+        .panel_table caption {
+            caption-side: top;
+            text-align: left;
+        }
+        
+        .panel_table th {
+            border: 1px solid #dededf;
+            background-color: #ffffff;
+            color: #000000;
+            padding: px;
+        }
+        
+        .panel_table td {
+            border: 1px solid #dededf;
+            background-color: #ffffff;
+            color: #000000;
+            padding: px;
+            text-align: center;
+        }
+    </style>
+
+    <script>    
+        let battery = {{soc}} ; //this line in the Ide will show as an error.
+        
+        // Get the radial progress bar and percentage text elements
+        const radialProgress = document.getElementById('radialProgress');
+        const percentageText = document.getElementById('percentageText');
+        // Calculate the progress in degrees (360 degrees = 100%)
+        const progress = (battery / 100) * 360;
+        //Update the CSS variable for the conic-gradient
+        radialProgress.style.setProperty('--progress', `${progress}deg`);
+        // Update the percentage text
+        percentageText.textContent = `${battery}%`;
+    </script>
+</head>
+
+<body> 
+        <div class="panel_table" role="region" tabindex="0">
+        <table>
+            <caption><br></caption>
+            <thead>
+                <tr>
+                    <td><p>Tensione: {{voltage}} V</p>
+                        <p>Corrente: {{current}} A</p>
+                    </td>
+                    <td>
+                        <div class="radial-progress-container">
+                        <div class="radial-progress" id="radialProgress">
+                        <div class="percentage" id="percentageText">
+                            0%
+                        </div></div></div>
+                    </td>
+                    <td>
+                        <p>Potenza: {{power}} W</p>
+                        <p>Consumo: {{consumedAh}} Ah</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Temperatura: {{temperature}} °C</p>
+                    </td>
+                    <td>
+                        <p>Tempo rimanente: {{timeToGo}} secondi</p>
+                    </td>
+                    <td> 
+                        <p>Allarme: {{alarm}}</p>
+                        <p>Motivo allarme: {{alarmReason}}</p>
+                    </td>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        </div>
+    <!-- panel html-->
+
+</body>
+</html>

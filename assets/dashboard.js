@@ -135,21 +135,80 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    function displayBatteryData(data) {
+    async function displayBatteryData(data) {
         const container = document.getElementById("vrm-data");
-
-        const html = `
-            <p>Stato di carica (SOC): ${data.data.soc}%</p>
-            <p>Tensione: ${data.data.voltage} V</p>
-            <p>Corrente: ${data.data.current} A</p>
-            <p>Potenza: ${data.data.power} W</p>
-            <p>Consumo: ${data.data.consumedAh} Ah</p>
-            <p>Tempo rimanente: ${data.data.timeToGo} secondi</p>
-            <p>Allarme: ${data.data.alarm ? 'Attivo' : 'Inattivo'}</p>
-            <p>Motivo allarme: ${data.data.alarmReason || 'Nessuno'}</p>
-            <p>Temperatura: ${data.data.temperature} °C</p>
-        `;
-
-        container.innerHTML = html;
+    
+        try {
+            // Fetch the HTML from the WordPress AJAX endpoint
+            const response = await fetch(proxyAjax.ajaxurl + '?action=proxy_vrm_data_template');
+            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+    
+            let html = await response.text();
+            
+            // Replace placeholders with actual data in the HTML
+            html = html
+                .replace(/{{soc}}/g, data.data.soc)
+                .replace(/{{voltage}}/g, data.data.voltage)
+                .replace(/{{current}}/g, data.data.current)
+                .replace(/{{power}}/g, data.data.power)
+                .replace(/{{consumedAh}}/g, data.data.consumedAh)
+                .replace(/{{timeToGo}}/g, data.data.timeToGo)
+                .replace(/{{alarm}}/g, data.data.alarm ? 'Attivo' : 'Inattivo')
+                .replace(/{{alarmReason}}/g, data.data.alarmReason || 'Nessuno')
+                .replace(/{{temperature}}/g, data.data.temperature);
+    
+            // Insert the modified HTML into the container
+            container.innerHTML = html;
+    
+            // Handle scripts separately
+            const scripts = container.querySelectorAll('script');
+            scripts.forEach(script => {
+                const newScript = document.createElement('script');
+                if (script.src) {
+                    // If the script has a src attribute, load it
+                    newScript.src = script.src;
+                } else {
+                    // If the script is inline, replace placeholders in its content
+                    let scriptContent = script.textContent;
+                    scriptContent = scriptContent
+                        .replace(/{{soc}}/g, data.data.soc)
+                        .replace(/{{voltage}}/g, data.data.voltage)
+                        .replace(/{{current}}/g, data.data.current)
+                        .replace(/{{power}}/g, data.data.power)
+                        .replace(/{{consumedAh}}/g, data.data.consumedAh)
+                        .replace(/{{timeToGo}}/g, data.data.timeToGo)
+                        .replace(/{{alarm}}/g, data.data.alarm ? 'Attivo' : 'Inattivo')
+                        .replace(/{{alarmReason}}/g, data.data.alarmReason || 'Nessuno')
+                        .replace(/{{temperature}}/g, data.data.temperature);
+                    newScript.textContent = scriptContent;
+                }
+                document.body.appendChild(newScript);
+            });
+    
+        } catch (error) {
+            console.error("Error loading battery data template:", error);
+        }
     }
+        /*
+
+        function displayBatteryData(data) {
+            const container = document.getElementById("vrm-data");
+    
+            const html = `
+                <p>Stato di carica (SOC): ${data.data.soc}%</p>
+                <p>Tensione: ${data.data.voltage} V</p>
+                <p>Corrente: ${data.data.current} A</p>
+                <p>Potenza: ${data.data.power} W</p>
+                <p>Consumo: ${data.data.consumedAh} Ah</p>
+                <p>Tempo rimanente: ${data.data.timeToGo} secondi</p>
+                <p>Allarme: ${data.data.alarm ? 'Attivo' : 'Inattivo'}</p>
+                <p>Motivo allarme: ${data.data.alarmReason || 'Nessuno'}</p>
+                <p>Temperatura: ${data.data.temperature} °C</p>
+            `;
+    
+            container.innerHTML = html;
+        }
+    */
 });
+
+

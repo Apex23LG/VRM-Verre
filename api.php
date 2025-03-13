@@ -161,7 +161,7 @@ function proxy_get_battery_data(){
         }
     }
     */
-    $batteryData = ['soc' => 50,
+    $batteryData = ['soc' => 45,
             'voltage' => 12.5, 
             'current' => 5, 
             'power'=>12, 
