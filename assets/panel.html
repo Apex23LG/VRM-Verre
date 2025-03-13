@@ -93,10 +93,10 @@
     </style>
 
     <script>    
-        let battery = {{soc}} ; //this line in the Ide will show as an error.
+        var battery = '{{soc}}'; //this line in the Ide will show as an error.
         
         // Get the radial progress bar and percentage text elements
-        const radialProgress = document.getElementById('radialProgress');
+        var radialProgress = document.getElementById('radialProgress');
         const percentageText = document.getElementById('percentageText');
         // Calculate the progress in degrees (360 degrees = 100%)
         const progress = (battery / 100) * 360;
@@ -113,7 +113,7 @@
             <caption><br></caption>
             <thead>
                 <tr>
-                    <td><img src="../icons/wheel.png" alt="Voltage Icon" class="icon">
+                    <td><img src="../wp-content/plugins/assets/icons//icons/battery.png" alt="Voltage Icon" class="icon">
                         <p>Tensione: {{voltage}} V</p>
                         <p>Corrente: {{current}} A</p>
                     </td>
