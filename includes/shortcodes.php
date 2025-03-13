@@ -33,13 +33,6 @@ add_shortcode('proxy_dashboard', function () {
             <input type="password" id="password" name="password" class="wp-block-input input-form" required>
             <button type="submit" class="wp-block-button__link">Login</button>
         </form>
-
-                <!-- Form per il 2FA (inizialmente nascosto) -->
-        <form id="proxy-2fa-form">
-            <label for="twoFactorCode">Codice 2FA:</label>
-            <input type="text" id="twoFactorCode" name="twoFactorCode" class="wp-block-input input-form" required>
-            <button type="submit" class="wp-block-button__link">Verifica</button>
-        </form>
     </div>
 
     <div id="proxy-dashboard" class="wp-block-group">
