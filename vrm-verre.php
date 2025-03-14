@@ -14,12 +14,12 @@
  
  // script e stili
  function enqueue_proxy_scripts() {
-    if (has_shortcode(get_post()->post_content, 'proxy_auth')) {
-        wp_enqueue_script('proxy-auth-js', plugin_dir_url(__FILE__) . 'assets/auth.js', array('jquery'), null, true);
-        wp_localize_script('proxy-auth-js', 'proxyAjax', array('ajaxurl' => admin_url('admin-ajax.php')));
-    }
+    wp_enqueue_script('proxy-auth-js', plugin_dir_url(__FILE__) . 'assets/auth.js', array('jquery'), null, true);
+    wp_localize_script('proxy-auth-js', 'proxyAjax', array('ajaxurl' => admin_url('admin-ajax.php')));
 
-    if (has_shortcode(get_post()->post_content, 'proxy_dashboard')) {
+
+    $post = get_post();
+    if ($post && has_shortcode(get_post()->post_content, 'proxy_dashboard')) {
         wp_enqueue_script('proxy-dashboard-js', plugin_dir_url(__FILE__) . 'assets/dashboard.js', array('jquery'), null, true);
         wp_localize_script('proxy-dashboard-js', 'proxyAjax', array('ajaxurl' => admin_url('admin-ajax.php')));
     }

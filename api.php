@@ -25,8 +25,6 @@ add_action('wp_ajax_proxy_auth', 'proxy_auth_handler');
 add_action('wp_ajax_nopriv_proxy_auth', 'proxy_auth_handler');
 
 function proxy_auth_handler() {
-    //Check USR regex e limite caratteri e nulla, regex per email
-    //Check PWD
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
 

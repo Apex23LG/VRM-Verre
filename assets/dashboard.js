@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("proxy-form");
     const loadingOverlay = document.getElementById("loading-overlay");
     const logoutButton = document.getElementById("logout-btn");
+    const errorForm = document.getElementById("form-error-message");
     let refreshInterval;
     loadingOverlay.style.display = "flex";
 
@@ -65,11 +66,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
+                        errorForm.style.display = "none";
                         loadingOverlay.style.display = "none";
                         window.location.href = "../vrmdashboard";
                     } else {
+                        
+                        errorForm.style.display = "block";
                         loadingOverlay.style.display = "none";
-                        alert("Errore: Login non riuscito, verifica le credenziali e riprova.");
+                       
                     }
                 })
                 .catch(error => {
