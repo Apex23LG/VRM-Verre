@@ -150,25 +150,38 @@
                     <td>
                         <div class="goleador-pack">
                             <div class="goleador">
-                                <img src="/wordpress/wp-content/plugins/vrm-verre/assets/icons/power.png" alt="Voltage Icon" class="icon">
+                                <img src="/wordpress/wp-content/plugins/vrm-verre/assets/icons/watt.png" alt="Voltage Icon" class="icon">
                             </div>
                             <div class="goleador">
                                 <p>Potenza: {{power}} W</p>
                             </div>
                         </div>
-                        <p>Consumo: {{consumedAh}} Ah</p>
+                        <div class="goleador-pack">
+                            <div class="goleador">
+                                <img src="/wordpress/wp-content/plugins/vrm-verre/assets/icons/mAh.png" alt="Voltage Icon" class="icon">
+                            </div>
+                            <div class="goleador">
+                                <p>Consumo: {{consumedAh}} Ah</p>
+                            </div>
+                        </div>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <p>Temperatura: {{temperature}} °C</p>
+                       
+                                <img src="/wordpress/wp-content/plugins/vrm-verre/assets/icons/temp.png" alt="Voltage Icon" class="icon">
+                          
+                          
+                                 <p>temperatura: {{temperature}} °C</p>
+                           
+                        </div>
                     </td>
                     <td>
-                        <p>Tempo rimanente: {{timeToGo}} secondi</p>
+                       
                     </td>
                     <td> 
-                        <p>Allarme: {{alarm}}</p>
-                        <p>Motivo allarme: {{alarmReason}}</p>
+                        <img src="/wordpress/wp-content/plugins/vrm-verre/assets/icons/lifetime.png" alt="Voltage Icon" class="icon">
+                        <p>Durata Batteria: {{timeToGo}} </p>
                     </td>
                 </tr>
             </thead>

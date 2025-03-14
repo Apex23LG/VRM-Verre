@@ -152,8 +152,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 .replace(/{{power}}/g, data.power)
                 .replace(/{{consumedAh}}/g, data.consumedAh)
                 .replace(/{{timeToGo}}/g, data.timeToGo)
-                .replace(/{{alarm}}/g, data.alarm ? 'Attivo' : 'Inattivo')
-                .replace(/{{alarmReason}}/g, data.alarmReason || 'Nessuno')
                 .replace(/{{temperature}}/g, data.temperature);
     
             // Insert the modified HTML into the container
@@ -176,8 +174,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     .replace(/{{power}}/g, data.power)
                     .replace(/{{consumedAh}}/g, data.consumedAh)
                     .replace(/{{timeToGo}}/g, data.timeToGo)
-                    .replace(/{{alarm}}/g, data.alarm ? 'Attivo' : 'Inattivo')
-                    .replace(/{{alarmReason}}/g, data.alarmReason || 'Nessuno')
                     .replace(/{{temperature}}/g, data.temperature);
                     newScript.textContent = scriptContent;
                 }
