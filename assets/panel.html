@@ -45,10 +45,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100%; /* Make sure it takes full cell height */
+            height: 100%;
         }
 
-        /* Percentage text */
         .percentage {
             position: relative;
             font-size: 24px;
@@ -77,19 +76,31 @@
         }
         
         .panel_table th {
-            border: 1px solid #dededf;
-            background-color: #ffffff;
             color: #000000;
-            padding: px;
+            padding: 1px;
         }
         
         .panel_table td {
-            border: 1px solid #dededf;
-            background-color: #ffffff;
+            background-color: #f0f8ff;
             color: #000000;
             padding: px;
             text-align: center;
         }
+        .icon{
+            height: 40px;
+            width: 40px;
+        }
+        .goleador-pack {
+              text-align: center;
+}
+        .goleador {
+            display: inline;
+            vertical-align: middle;
+            float:left;
+            padding-right: 3px;
+            padding-left:3px;
+}
+        
     </style>
 
     <script>    
@@ -112,9 +123,22 @@
             <caption><br></caption>
             <thead>
                 <tr>
-                    <td><img src="../wp-content/plugins/assets/icons//icons/battery.png" alt="Voltage Icon" class="icon">
-                        <p>Tensione: {{voltage}} V</p>
-                        <p>Corrente: {{current}} A</p>
+                    <td>
+                        <div class="goleador-pack">
+                             <div class="goleador">
+                                <img src="/wordpress/wp-content/plugins/vrm-verre/assets/icons/wheel.png" alt="Voltage Icon" class="icon">
+                            </div>
+                            <div class="goleador">
+                                <p>Tensione: {{voltage}} V</p>
+                            </div>
+                          </div>
+                          <div class="goleador-pack">
+                            <div class="goleador"> <img src="/wordpress/wp-content/plugins/vrm-verre/assets/icons/camera.png" alt="Current Icon" class="icon">
+                            </div>
+                            <div class="goleador"><p>Corrente: {{current}} A</p>
+                            </div>
+                        </div>
+                          <p></p>
                     </td>
                     <td>
                         <div class="radial-progress-container">
@@ -124,7 +148,14 @@
                         </div></div></div>
                     </td>
                     <td>
-                        <p>Potenza: {{power}} W</p>
+                        <div class="goleador-pack">
+                            <div class="goleador">
+                                <img src="/wordpress/wp-content/plugins/vrm-verre/assets/icons/power.png" alt="Voltage Icon" class="icon">
+                            </div>
+                            <div class="goleador">
+                                <p>Potenza: {{power}} W</p>
+                            </div>
+                        </div>
                         <p>Consumo: {{consumedAh}} Ah</p>
                     </td>
                 </tr>
@@ -148,3 +179,14 @@
 
 </body>
 </html>
+
+
+<!--
+<div class="goleador-pack">
+    <div class="goleador">
+        <img src="/wordpress/wp-content/plugins/vrm-verre/assets/icons/" alt="Voltage Icon" class="icon">
+    </div>
+    <div class="goleador">
+    </div>
+</div>
+-->

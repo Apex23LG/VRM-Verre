@@ -12,6 +12,7 @@
  require_once plugin_dir_path(__FILE__) . 'api.php';
  require_once plugin_dir_path(__FILE__) . 'includes/shortcodes.php';
  
+ 
  // script e stili
  function enqueue_proxy_scripts() {
     if (has_shortcode(get_post()->post_content, 'proxy_auth')) {

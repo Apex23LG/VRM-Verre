@@ -44,8 +44,8 @@ function proxy_auth_handler() {
             set_transient("proxy_token_$proxy_token", [
                 'api_token' => $api_token,
                 'idUser' => $idUser
-            ], 120);
-            setcookie("proxy_token", $proxy_token, time()+120, "/", "", true, false);
+            ], 120000);
+            setcookie("proxy_token", $proxy_token, time()+120000, "/", "", true, false);
 
             wp_send_json_success(['proxy_token' => $proxy_token, 'success' => true]);
         }
@@ -88,7 +88,7 @@ function proxy_get_battery_data(){
         return;
     }
     $batteryData = [
-           'soc' => rand(0, 100), // SOC tra 0 e 100%
+            'soc' => rand(0, 100), // SOC tra 0 e 100%
             'voltage' => round(mt_rand(1150, 1350) / 100, 1), // Tensione tra 11.5V e 13.5V
             'current' => round(mt_rand(-200, 200) / 10, 1), // Corrente tra -20A e 20A
             'power' => round(mt_rand(0, 500) / 10, 1), // Potenza tra 0W e 50W
