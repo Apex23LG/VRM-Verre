@@ -12,6 +12,7 @@
  require_once plugin_dir_path(__FILE__) . 'api.php';
  require_once plugin_dir_path(__FILE__) . 'includes/shortcodes.php';
  
+ 
  // script e stili
  function enqueue_proxy_scripts() {
     wp_enqueue_script('proxy-auth-js', plugin_dir_url(__FILE__) . 'assets/auth.js', array('jquery'), null, true);
